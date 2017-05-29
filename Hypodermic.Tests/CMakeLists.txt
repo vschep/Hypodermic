@@ -29,6 +29,7 @@ set(HypodermicTests_sources
     ProvidedInstanceRegistrationTests.cpp
     RegistrationTests.cpp
     UseIfNoneTests.cpp
+    TypeInfoTests.cpp
 )
 
 include_directories("..")

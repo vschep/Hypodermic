@@ -4,8 +4,6 @@
 #include <string>
 #include <typeinfo>
 
-#include <boost/algorithm/string.hpp>
-
 #if defined(__GNUC__)
 # include <cxxabi.h>
 #endif /* __GNUC__ */
@@ -39,7 +37,17 @@ namespace Hypodermic
 
         static std::string dotNetify(const std::string& typeName)
         {
-            return boost::algorithm::replace_all_copy(typeName, "::", ".");
+            std::string dotNetifiedStr(typeName);
+            std::string from("::");
+            std::string to(".");
+            size_t start_pos = 0;
+
+            while((start_pos = dotNetifiedStr.find(from, start_pos)) != std::string::npos) {
+                dotNetifiedStr.replace(start_pos, from.length(), to);
+                start_pos += to.length();
+            }
+
+            return dotNetifiedStr;
         }
 
         static std::string demangleTypeName(const std::string& typeName)
