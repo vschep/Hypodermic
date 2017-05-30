@@ -9,13 +9,13 @@ namespace Hypodermic
 {
 namespace RegistrationDescriptorOperations
 {
-    
+
     namespace Details
     {
 
         struct InstanceRegistrationNotResolvable {};
         struct InstanceRegistrationResolvable {};
-        
+
         template <class TDescriptorInfo>
         struct GetInstanceRegistrationResolvability
         {
@@ -65,7 +65,7 @@ namespace RegistrationDescriptorOperations
             descriptor->addTypeIfMissing(createKeyForType< typename TDescriptorInfo::InstanceType >());
 
             auto updatedDescriptor = descriptor->template createUpdate< typename TDescriptorInfo::SelfRegistered::Type >();
-            descriptor->registrationDescriptorUpdated()(updatedDescriptor);
+            emit descriptor->registrationDescriptorUpdated(updatedDescriptor);
 
             return *updatedDescriptor;
         }

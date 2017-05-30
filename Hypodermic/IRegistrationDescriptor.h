@@ -2,8 +2,7 @@
 
 #include <functional>
 #include <memory>
-
-#include <boost/signals2.hpp>
+#include <QObject>
 
 
 namespace Hypodermic
@@ -15,15 +14,15 @@ namespace Hypodermic
     struct TypeInfo;
 
 
-    class IRegistrationDescriptor
+    class IRegistrationDescriptor : public QObject
     {
-    public:
-        typedef boost::signals2::signal< void(const std::shared_ptr< IRegistrationDescriptor >&) > Updated;
+        Q_OBJECT
+
+    signals:
+        void registrationDescriptorUpdated(const std::shared_ptr< IRegistrationDescriptor >& registrationDescriptor);
 
     public:
         virtual ~IRegistrationDescriptor() {}
-
-        virtual Updated& registrationDescriptorUpdated() const = 0;
 
         virtual std::function< void(IRegistrationScope&) > getDescriptionFactory() const = 0;
 

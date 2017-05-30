@@ -9,7 +9,7 @@ namespace Hypodermic
 {
 namespace RegistrationDescriptorOperations
 {
-    
+
     template
     <
         class TDescriptor,
@@ -38,7 +38,7 @@ namespace RegistrationDescriptorOperations
             auto descriptor = static_cast< TDescriptor* >(this);
 
             auto updatedDescriptor = descriptor->template createUpdate< typename TDescriptorInfo::UseIfNone::Type >();
-            descriptor->registrationDescriptorUpdated()(updatedDescriptor);
+            emit descriptor->registrationDescriptorUpdated(updatedDescriptor);
 
             return *updatedDescriptor;
         }

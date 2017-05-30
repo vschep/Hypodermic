@@ -44,7 +44,7 @@ namespace Testing
             });
 
         builder.registerType< TypeThatNeedsLoader >().singleInstance();
-    
+
         builder.registerType< Initializer >();
 
         auto container = builder.build();

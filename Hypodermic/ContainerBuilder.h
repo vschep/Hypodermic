@@ -3,6 +3,7 @@
 #include <functional>
 #include <memory>
 #include <unordered_map>
+#include <QObject>
 
 #include "Hypodermic/Container.h"
 #include "Hypodermic/ContainerInstanceRegistration.h"
@@ -146,10 +147,10 @@ namespace Hypodermic
         {
             std::weak_ptr< IRegistrationDescriptor > weakDescriptor = registrationDescriptor;
 
-            registrationDescriptor->registrationDescriptorUpdated().connect([this, weakDescriptor](const std::shared_ptr< IRegistrationDescriptor >& x)
+            QObject::connect(registrationDescriptor.get(), &IRegistrationDescriptor::registrationDescriptorUpdated, [this, weakDescriptor](const std::shared_ptr< IRegistrationDescriptor >& x)
             {
                 auto descriptor = weakDescriptor.lock();
-                descriptor->registrationDescriptorUpdated().disconnect_all_slots();
+                QObject::disconnect(descriptor.get(), &IRegistrationDescriptor::registrationDescriptorUpdated, 0, 0);
 
                 m_buildActions.erase(descriptor);
                 m_registrationDescriptors.insert

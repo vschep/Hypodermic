@@ -56,7 +56,7 @@ namespace RegistrationDescriptorOperations
             });
 
             auto updatedDescriptor = descriptor->template createUpdate< typename TDescriptorInfo::template RegisterBase< TBase >::Type >();
-            descriptor->registrationDescriptorUpdated()(updatedDescriptor);
+            emit descriptor->registrationDescriptorUpdated(updatedDescriptor);
 
             return *updatedDescriptor;
         }

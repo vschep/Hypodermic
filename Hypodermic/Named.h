@@ -49,7 +49,7 @@ namespace RegistrationDescriptorOperations
             descriptor->addTypeIfMissing(createKeyForNamedType< InstanceType >(name));
 
             auto updatedDescriptor = descriptor->template createUpdate< typename TDescriptorInfo::SelfRegistered::Type >();
-            descriptor->registrationDescriptorUpdated()(updatedDescriptor);
+            emit descriptor->registrationDescriptorUpdated(updatedDescriptor);
 
             return *updatedDescriptor;
         }
@@ -79,7 +79,7 @@ namespace RegistrationDescriptorOperations
             });
 
             auto updatedDescriptor = descriptor->template createUpdate< typename TDescriptorInfo::template RegisterBase< TBase >::Type >();
-            descriptor->registrationDescriptorUpdated()(updatedDescriptor);
+            emit descriptor->registrationDescriptorUpdated(updatedDescriptor);
 
             return *updatedDescriptor;
         }

@@ -1,3 +1,14 @@
+Testing
+CMakeFiles
+*.cmake
+CMakeCache.txt
+Hypodermic.Tests/Hypodermic.Tests
+Hypodermic.Tests/*_automoc.cpp
+moc_*.cpp
+Makefile
+*.pc
+
+.#*.cpp
 *.user
 *.ipch
 *.opensdf

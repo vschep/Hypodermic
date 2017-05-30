@@ -8,6 +8,17 @@ if(Boost_FOUND)
     link_directories(${Boost_LIBRARY_DIRS})
 endif()
 
+# Qt
+# Set CMAKE_PREFIX_PATH like this: export CMAKE_PREFIX_PATH=/opt/Qt/5.8/gcc_64
+
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt5Core)
+
+get_target_property(QtCore_location Qt5::Core LOCATION)
 
 set(HypodermicTests_sources
 
@@ -37,7 +48,7 @@ include_directories("..")
 add_definitions(-DBOOST_TEST_DYN_LINK)
 
 add_executable(Hypodermic.Tests ${HypodermicTests_sources})
-target_link_libraries(Hypodermic.Tests ${Boost_LIBRARIES})
+target_link_libraries(Hypodermic.Tests ${Boost_LIBRARIES} Qt5::Core)
 
 add_test(cmake_Hypodermic.Tests ${CMAKE_CURRENT_BINARY_DIR}/Hypodermic.Tests --result_code=no --report_level=no)
 

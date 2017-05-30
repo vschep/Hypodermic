@@ -40,11 +40,6 @@ namespace Hypodermic
             return m_instanceType;
         }
 
-        Updated& registrationDescriptorUpdated() const override
-        {
-            return m_registrationDescriptorUpdated;
-        }
-
         std::function< void(IRegistrationScope&) > getDescriptionFactory() const override
         {
             return [&](IRegistrationScope& x) { x.addRegistration(describe()); };
@@ -97,7 +92,7 @@ namespace Hypodermic
         TypeAliases m_typeAliases;
         DependencyFactories m_dependencyFactories;
         ActivationHandlers m_activationHandlers;
-        mutable Updated m_registrationDescriptorUpdated;
+//        mutable Updated m_registrationDescriptorUpdated;
     };
 
 } // namespace Hypodermic

@@ -63,7 +63,7 @@ namespace RegistrationDescriptorOperations
             );
 
             auto updatedDescriptor = descriptor->template createUpdate< typename TDescriptorInfo::template RegisterDependencyFactory< TDependency >::Type >();
-            descriptor->registrationDescriptorUpdated()(updatedDescriptor);
+            emit descriptor->registrationDescriptorUpdated(updatedDescriptor);
 
             return *updatedDescriptor;
         }
@@ -89,7 +89,7 @@ namespace RegistrationDescriptorOperations
             );
 
             auto updatedDescriptor = descriptor->template createUpdate< typename TDescriptorInfo::template RegisterDependencyInstance< TDependency, TProvidedDependency >::Type >();
-            descriptor->registrationDescriptorUpdated()(updatedDescriptor);
+            emit descriptor->registrationDescriptorUpdated(updatedDescriptor);
 
             return *updatedDescriptor;
         }
@@ -111,7 +111,7 @@ namespace RegistrationDescriptorOperations
             });
 
             auto updatedDescriptor = descriptor->template createUpdate< typename TDescriptorInfo::template RegisterDependency< TDependency, TProvidedDependency >::Type >();
-            descriptor->registrationDescriptorUpdated()(updatedDescriptor);
+            emit descriptor->registrationDescriptorUpdated(updatedDescriptor);
 
             return *updatedDescriptor;
         }
