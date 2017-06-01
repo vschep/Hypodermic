@@ -8,7 +8,7 @@ moc_*.cpp
 Makefile
 *.pc
 
-.#*.cpp
+.#*.*
 *.user
 *.ipch
 *.opensdf

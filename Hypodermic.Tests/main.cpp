@@ -28,4 +28,7 @@ struct GlobalFixture
 
 BOOST_GLOBAL_FIXTURE(GlobalFixture);
 
+// Add files that Qt moc generates here
+// see also https://cmake.org/cmake/help/latest/prop_tgt/AUTOMOC.html
 #include "../Hypodermic/moc_IRegistrationDescriptor.cpp"
+#include "../Hypodermic/moc_RegistrationActivator.cpp"

@@ -3,8 +3,7 @@
 #include <functional>
 #include <memory>
 #include <vector>
-
-#include <boost/signals2.hpp>
+#include <QObject>
 
 #include "Hypodermic/ActivationHandlers.h"
 #include "Hypodermic/InstanceFactory.h"
@@ -17,8 +16,10 @@
 namespace Hypodermic
 {
 
-    class RegistrationActivator : public IRegistrationActivator
+    class RegistrationActivator : public QObject, public IRegistrationActivator
     {
+        Q_OBJECT
+
     public:
         RegistrationActivator(const IRegistration& registration,
                               const InstanceFactory& instanceFactory,
@@ -27,7 +28,7 @@ namespace Hypodermic
             , m_instanceFactory(instanceFactory)
         {
             for (auto&& handler : activationHandlers)
-                m_activated.connect(handler);
+                QObject::connect(this, &RegistrationActivator::activated, handler);
         }
 
         std::shared_ptr< void > activate(IResolutionContext& resolutionContext) override
@@ -45,13 +46,15 @@ namespace Hypodermic
 
         void raiseActivated(ComponentContext& container, const std::shared_ptr< void >& instance) override
         {
-            m_activated(container, instance);
+            emit activated(container, instance);
         }
+
+    signals:
+        void activated(ComponentContext& container, const std::shared_ptr< void >& instance);
 
     private:
         const IRegistration& m_registration;
         InstanceFactory m_instanceFactory;
-        boost::signals2::signal< void(ComponentContext&, const std::shared_ptr< void >&) > m_activated;
     };
 
 } // namespace Hypodermic
